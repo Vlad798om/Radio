@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="language" content="ro">
+<meta name="author" content="Marcaly">
+<meta name="genre" content="Muzică, Radio">
+
+<title>Radio Player</title>
+</head>
+<body>
+<div id="player-container">
+  <h2>Radio</h2>
+  <audio id="audio-player" controls>
+    <source id="radio-source" src="https://digitalhits.co.uk/radio/8040/DH1" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <br>
+  <button id="play-pause-button">Play/Pause</button>
+  <input type="range" id="volume-control" min="0" max="100" value="100">
+  <span id="volume-label">Volume: 100%</span>
+  <br>
+  <p id="song-info">Current Song: Unknown</p>
+</div>
+<div id="radio-list">
+  <h3>Alegeți postul tau de Radio.</h3>
+  <ul>
+    
+     <li><button onclick="changeRadioSource('https://streams.radiozum.md/listen/zum2/ZUM2','Radio1')">Radio Zum2</button></li>
+
+    <li><button onclick="changeRadioSource('https://live.kissfm.md:443/kissfm.chisinau','Radio22')">KissFm</button></li>
+    <li><button onclick="changeRadioSource('https://stream.dixi.md:9443/HitFM','Radio2')">HitFm</button></li>
+    <li><button onclick="changeRadioSource('https://stream.dixi.md:9443/RadioRelax','Radio11')">Radio Relax</button></li>
+    <li><button onclick="changeRadioSource('https://stream.dixi.md:9443/Roks','Radio13')">Radio Roks</button></li>
+    <li><button onclick="changeRadioSource('https://air.radiorecord.md/recordmdhd','Radio19')">Радио Рекорд</button></li>
+    <li><button onclick="changeRadioSource('https://streams.radiozum.md/listen/autoradio/autoradio','Radio20')">Auto Radio</button></li>
+    <li><button onclick="changeRadioSource('https://streams.radiozum.md/listen/zum3/ZUM3','Radio18')">Radio Zum3</button></li>
+
+    <li><button onclick="changeRadioSource('https://astreaming.ecofm.md:8443/stream.aac','Radio12')">Eco Fm</button></li>
+    <li><button onclick="changeRadioSource('https://audio.jurnalfm.md/hq','Radio23')">Jurnal Fm</button></li>
+    <li><button onclick="changeRadioSource('https://s5.radio.co/sfff7b7e97/listen', 'Radio ')"> Radio Micul Samaritean</button></li>
+    <li><button onclick="changeRadioSource('https://air.rvs.md:8443/rvsmoldova','Radio16')">Radio vocea Sperantei</button></li>
+
+    <li><button onclick="changeRadioSource('http://37.233.41.76:8000/lovefm','Radio10')">Love Radio</button></li>
+    <li><button onclick="changeRadioSource('http://radiolive.studentus.md:8000/live','Radio15')">Radio Student</button></li>
+    <li><button onclick="changeRadioSource('http://91.230.214.92:8000/megahit','Radio7')">MegaHit</button></li>
+    <li><button onclick="changeRadioSource('http://live.ruradio.md:8000/ruradio', 'Radio 3')">Maestro FM</button></li>
+    <li><button onclick="changeRadioSource('http://77.89.206.126:7030/live', 'Radio 4')">Новое Радио Молдова</button></li>
+    <!-- Adaugă alte surse de radio aici -->
+    <li><button onclick="changeRadioSource('http://live.maestrofm.md:8000/maestro', 'Radio 5')">
+     Like FM - Русское радио</button></li>
+    <li><button onclick="changeRadioSource('http://live.maestrofm.md:8000/r1','Radio6')">Radio One</button></li>
+    <li><button onclick="changeRadioSource('http://live.aquarellefm.md:8000/aquarellefm.mp3','Radio8')">Aquarelle Fm</button></li>
+    <li><button onclick="changeRadioSource('http://37.233.41.76:8000/ru_hit','Radio21')">Dance Fm</button></li>
+    <li><button onclick="changeRadioSource('http://asculta.logos.md:10000/live','Radio17')">Radio Logos</button></li>
+    <li><button onclick="changeRadioSource('https://stream.radioplai.md:8000/live','Radio24')">Radio Plai</button></li>
+    <li><button onclick="changeRadioSource('https://188.138.191.214:8000/RadioDar','Radio25')">Radio Dar</button></li>
+    
+
+
+
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+const audioPlayer = document.getElementById('audio-player');
+const playPauseButton = document.getElementById('play-pause-button');
+const volumeControl = document.getElementById('volume-control');
+const volumeLabel = document.getElementById('volume-label');
+const songInfo = document.getElementById('song-info');
+
+// Funcția pentru a schimba sursa audio și afișa numele postului de radio
+function changeRadioSource(newSource, radioName) {
+  const radioSource = document.getElementById('radio-source');
+  radioSource.src = newSource;
+  audioPlayer.load();
+  audioPlayer.play();
+  songInfo.textContent = `Current Song: ${radioName}`;
+}
+
+// Butonul de play/pause
+playPauseButton.addEventListener('click', () => {
+  if (audioPlayer.paused) {
+    audioPlayer.play();
+    playPauseButton.textContent = 'Pause';
+  } else {
+    audioPlayer.pause();
+    playPauseButton.textContent = 'Play';
+  }
+});
+
+// Controlul de volum
+volumeControl.addEventListener('input', () => {
+  audioPlayer.volume = volumeControl.value / 100;
+  volumeLabel.textContent = `Volume: ${volumeControl.value}%`;
+});
+
+// Update song info
+audioPlayer.addEventListener('loadedmetadata', () => {
+  if (audioPlayer.duration !== Infinity) {
+    songInfo.textContent = `Current Song: ${audioPlayer.currentSrc}`;
+  } else {
+   
+  }
+});
+</script>
+</body>
+</html>
